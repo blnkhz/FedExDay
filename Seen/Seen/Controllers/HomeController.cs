@@ -12,10 +12,12 @@ namespace Seen.Controllers
     public class HomeController : Controller
     {
         private SightingRepository sightingRepository;
+        private Answers answers;
 
-        public HomeController(SightingRepository sightingRepository)
+        public HomeController(SightingRepository sightingRepository, Answers answers)
         {
             this.sightingRepository = sightingRepository;
+            this.answers = answers;
         }
 
         public IActionResult Index()
@@ -26,8 +28,8 @@ namespace Seen.Controllers
         [Route("Add")]
         public async Task<IActionResult> Add()
         {
-            var list = await sightingRepository.SelectAllAsync();
-            return Ok(list);
+            //var list = await sightingRepository.SelectAllAsync();
+            return View(answers);
         }
 
         [HttpPost]
