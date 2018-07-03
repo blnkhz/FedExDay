@@ -1,4 +1,5 @@
-﻿using Seen.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Seen.Entities;
 using Seen.Models;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,6 @@ namespace Seen.Repository
 {
     public class SightingRepository
     {
-
         private SeenContext seenContext;
 
         public SightingRepository(SeenContext seenContext)
@@ -32,20 +32,20 @@ namespace Seen.Repository
 
         public async Task<List<Sighting>> SelectAllAsync()
         {
-            var sightingList = await feedbackContext.Questions.ToListAsync();
+            var sightingList = await seenContext.Sightings.ToListAsync();
             return sightingList;
         }
 
-        public async Task<Question> SelectByIdAsync(long id)
+        public async Task<Sighting> SelectByIdAsync(long id)
         {
-            var questionToFind = await feedbackContext.Questions.FindAsync(id);
+            var questionToFind = await seenContext.Sightings.FindAsync(id);
             return questionToFind;
         }
 
-        public async Task UpdateAsync(Question question)
+        public async Task UpdateAsync(Sighting sighting)
         {
-            feedbackContext.Questions.Update(question);
-            await feedbackContext.SaveChangesAsync();
+            seenContext.Sightings.Update(sighting);
+            await seenContext.SaveChangesAsync();
         }
     }
 }
