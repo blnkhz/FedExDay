@@ -53,49 +53,6 @@
         <img src="https://i.imgur.com/3kGnqYa.png" alt="s e e n">
     </a>
     <div id="map"></div>
-    <div id="form">
-        @for (int i = 0; i < Model.Count; i++)
-        {
-        <table>
-            <tr>
-                <td>Date:</td>
-                <td>
-                    <p>@Model[i].Day</p>
-                </td>
-            </tr>
-            <tr>
-                <td>Hairstyle:</td>
-                <td>
-                    <p>@Model[i].HairStyle</p>
-                </td>
-            </tr>
-            <tr>
-                <td>Hair Color</td>
-                <td>@Model[i].HairColor</td>
-            </tr>
-            <tr>
-                <td>Gender:</td>
-                <td>
-                    @Model[i].Gender
-                </td>
-            </tr>
-            <tr>
-                <td>Glasses:</td>
-                <td>
-                    @if (@Model[i].Glasses == true)
-                    {
-                        <p>Yes</p>
-                    }
-                    else
-                    {
-                        <p>No</p>
-
-                    }
-                </td>
-            </tr>
-        </table>
-        }
-    </div>
     <script type="text/javascript">
         window.onload = function () {
             var locations = [
@@ -106,10 +63,12 @@
                 [
                     "@Model[i].Latitude",
                     "@Model[i].Longitude",
+                    "@Model[i].Id",
                     "@Model[i].HairColor",
-                    "@Model[i].HairStyle"
-                    "@Model[i].Gender"
-                    "@Model[i].Glasses"
+                    "@Model[i].HairStyle",
+                    "@Model[i].Gender",
+                    "@Model[i].Glasses",
+                    
 
                 ],
                         </text>
@@ -122,20 +81,20 @@
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
             var infowindow = new google.maps.InfoWindow();
-            function createMarker(latlng, haircolor, hairstyle) {
+            function createMarker(latlng, id, haircolor, hairstyle, gender, glasses) {
                 var marker = new google.maps.Marker({
                     position: latlng,
                     map: map
                 });
                 google.maps.event.addListener(marker, 'click', function () {
-                    var content = `${haircolor} <br> ${hairstyle}`;
+                    var content = `${haircolor} <br> ${hairstyle} <br> ${gender} <br> ${glasses} <a href="itsamatch/${id}">a</a>`;
                     infowindow.setContent(content);
                     infowindow.open(map, marker);
                 });
                 return marker;
             }
             for (var i = 0; i < locations.length; i++) {
-                createMarker(new google.maps.LatLng(locations[i][0], locations[i][1]), locations[i][2], locations[i][3]);
+                createMarker(new google.maps.LatLng(locations[i][0], locations[i][1]), locations[i][2], locations[i][3], locations[i][4], locations[i][5], locations[i][6]);
             }
         }
     </script>
