@@ -65,10 +65,10 @@ namespace Seen.Controllers
 
         [HttpGet]
 		[Route("ItsAMatch/{id}")]
-        public async Task<IActionResult> ItsAMatch()
+        public async Task<IActionResult> ItsAMatch([FromRoute]long id)
 		{
-			var list = await sightingRepository.SelectAllAsync();
-            return View(list);
+			var handle = await sightingRepository.SelectByIdAsync(id);
+            return View(handle);
 		}
     }
 }
