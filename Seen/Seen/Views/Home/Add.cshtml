@@ -6,14 +6,11 @@
     <title>s e e n</title>
     <style>
 
-        /* Always set the map height explicitly to define the size of the div
-        * element that contains the map. */
         #map {
             height: 50%;
             width: 50%;
             margin: 30%;
         }
-        /* Optional: Makes the sample page fill the window. */
         html, body {
             height: 100%;
             margin: 0;
@@ -52,7 +49,7 @@
                             +
                             @for (int i = 0; i < Model.hairStyles.Count; i++)
                             {
-                                <option value='@Model.hairStyles[i]'>@Model.hairStyles[i]</option>
+                    <option value='@Model.hairStyles[i]'>@Model.hairStyles[i]</option>
                             }
                         </select>
                     </td>
@@ -64,8 +61,30 @@
                             +
                             @for (int i = 0; i < Model.hairColors.Count; i++)
                             {
-                                <option value='@Model.hairColors[i]'>@Model.hairColors[i]</option>
+                            <option value='@Model.hairColors[i]'>@Model.hairColors[i]</option>
                             }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>
+                        <select name='Gender'>
+                            +
+                            @for (int i = 0; i < Model.genders.Count; i++)
+                            {
+                            <option value='@Model.genders[i]'>@Model.genders[i]</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Glasses?</td>
+                    <td>
+                        <select name='Glasses'>
+                            +
+                            <option value='true'>Yes</option>
+                            <option value='false'>No</option>
                         </select>
                     </td>
                 </tr>
@@ -75,7 +94,7 @@
     </div>
     <div id="message">Location saved</div>
     <script>
-var map;
+      var map;
       var marker;
       var infowindow;
       var messagewindow;
@@ -147,5 +166,5 @@ var map;
       }</script>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeryQUReAomPDiBe6toux-gRCazvnZHnQ&callback=initMap"></script>
-</body>
+    </body>
 </html>
