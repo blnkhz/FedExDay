@@ -34,9 +34,15 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>Latitude:</td>
+                    <td>
+                        <input size="20" type="number" step="any" id="latbox" name="Latitude">
+                    </td>
+                </tr>
+                <tr>
                     <td>Longitude:</td>
                     <td>
-                        <input type="number" name="Longitude">
+                        <input size="20" type="number" id="lngbox" step="any" name="Longitude">
                     </td>
                 </tr>
                 <tr>
@@ -98,7 +104,12 @@ var map;
 
           google.maps.event.addListener(marker, 'click', function() {
             infowindow.open(map, marker);
-          });
+            });
+
+            google.maps.event.addListener(marker, 'click', function (event) {
+                document.getElementById("latbox").value = event.latLng.lat();
+                document.getElementById("lngbox").value = event.latLng.lng();
+            });
         });
       }
 
