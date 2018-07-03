@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Seen.Entities;
+using Seen.Models;
 using Seen.Repository;
 
 namespace Seen
@@ -27,6 +28,7 @@ namespace Seen
             services.AddMvc();
             services.AddDbContext<SeenContext>(opt => opt.UseInMemoryDatabase("testdatabase"));
             services.AddScoped<SightingRepository>();
+            services.AddScoped<Answers>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
