@@ -62,5 +62,13 @@ namespace Seen.Controllers
             var list = await sightingRepository.SelectAllAsync();
             return Ok(list);
         }
+
+        [HttpGet]
+		[Route("ItsAMatch/{id}")]
+        public async Task<IActionResult> ItsAMatch()
+		{
+			var list = await sightingRepository.SelectAllAsync();
+            return View(list);
+		}
     }
 }
