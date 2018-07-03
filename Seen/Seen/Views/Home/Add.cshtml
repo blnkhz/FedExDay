@@ -5,20 +5,56 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <title>s e e n</title>
     <style>
+    #map {
+        height: 50%;
+        width: 50%;
+        margin: auto;
+        border-radius: 5%;
+        border: 5px solid;
+        border-color: #DC82A4;
+        padding: 10px;
+        opacity: 0.75;
+        margin-top: 100px;
+        margin-bottom:100px;
+        }
 
-        #map {
-            height: 50%;
-            width: 50%;
-            margin: 30%;
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
         }
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
+     
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 150px;
+        width: 50%;
         }
+
+              footer {
+        position: absolute;
+        letter-spacing: 8px;
+        margin-top: 40px;
+        color: slategrey;
+        display: block;
+        align-content: center;
+        align-items: center;
+        width: 100%;
+        height: 40px;
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        }
+               #form {
+        font-family:Arial, Helvetica, sans-serif;
+       }
+          
     </style>
 </head>
 <body>
+    <a href="/">
+        <img src="https://i.imgur.com/3kGnqYa.png" alt="s e e n">
+    </a>
     <div id="map" height="460px" width="100%"></div>
     <div id="form">
         <form action="Add" method="post">
@@ -49,7 +85,7 @@
                             +
                             @for (int i = 0; i < Model.hairStyles.Count; i++)
                             {
-                    <option value='@Model.hairStyles[i]'>@Model.hairStyles[i]</option>
+                                <option value='@Model.hairStyles[i]'>@Model.hairStyles[i]</option>
                             }
                         </select>
                     </td>
@@ -61,7 +97,7 @@
                             +
                             @for (int i = 0; i < Model.hairColors.Count; i++)
                             {
-                            <option value='@Model.hairColors[i]'>@Model.hairColors[i]</option>
+                                <option value='@Model.hairColors[i]'>@Model.hairColors[i]</option>
                             }
                         </select>
                     </td>
@@ -73,7 +109,7 @@
                             +
                             @for (int i = 0; i < Model.genders.Count; i++)
                             {
-                            <option value='@Model.genders[i]'>@Model.genders[i]</option>
+                                <option value='@Model.genders[i]'>@Model.genders[i]</option>
                             }
                         </select>
                     </td>
@@ -93,78 +129,77 @@
         </form>
     </div>
     <div id="message">Location saved</div>
-    <script>
-      var map;
-      var marker;
-      var infowindow;
-      var messagewindow;
+    <script>var map;
+var marker;
+var infowindow;
+var messagewindow;
 
-      function initMap() {
-        var california = {lat: 37.4419, lng: -122.1419};
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: california,
-          zoom: 13
-        });
-
-        infowindow = new google.maps.InfoWindow({
-          content: document.getElementById('form')
-        });
-
-        messagewindow = new google.maps.InfoWindow({
-          content: document.getElementById('message')
-        });
-
-        google.maps.event.addListener(map, 'click', function(event) {
-          marker = new google.maps.Marker({
-            position: event.latLng,
-            map: map
-          });
-
-
-          google.maps.event.addListener(marker, 'click', function() {
-            infowindow.open(map, marker);
+function initMap() {
+            var california = { lat: 37.4419, lng: -122.1419 };
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: california,
+                zoom: 13
             });
 
-            google.maps.event.addListener(marker, 'click', function (event) {
-                document.getElementById("latbox").value = event.latLng.lat();
-                document.getElementById("lngbox").value = event.latLng.lng();
+            infowindow = new google.maps.InfoWindow({
+                content: document.getElementById('form')
             });
-        });
-      }
 
-      function saveData() {
-        var name = escape(document.getElementById('name').value);
-        var address = escape(document.getElementById('address').value);
-        var type = document.getElementById('type').value;
-        var latlng = marker.getPosition();
-        var url = 'phpsqlinfo_addrow.php?name=' + name + '&address=' + address +
-                  '&type=' + type + '&lat=' + latlng.lat() + '&lng=' + latlng.lng();
+            messagewindow = new google.maps.InfoWindow({
+                content: document.getElementById('message')
+            });
 
-        downloadUrl(url, function(data, responseCode) {
+            google.maps.event.addListener(map, 'click', function(event) {
+                marker = new google.maps.Marker({
+                    position: event.latLng,
+                    map: map
+                });
 
-          if (responseCode == 200 && data.length <= 1) {
-            infowindow.close();
-            messagewindow.open(map, marker);
-          }
-        });
-      }
 
-      function downloadUrl(url, callback) {
-        var request = window.ActiveXObject ?
-            new ActiveXObject('Microsoft.XMLHTTP') :
-            new XMLHttpRequest;
+                google.maps.event.addListener(marker, 'click', function() {
+                    infowindow.open(map, marker);
+                });
 
-        request.onreadystatechange = function() {
-          if (request.readyState == 4) {
-            request.onreadystatechange = doNothing;
-            callback(request.responseText, request.status);
-          }
-        };
+                google.maps.event.addListener(marker, 'click', function(event) {
+                    document.getElementById("latbox").value = event.latLng.lat();
+                    document.getElementById("lngbox").value = event.latLng.lng();
+                });
+            });
+}
 
-        request.open('GET', url, true);
-        request.send(null);
-      }</script>
+function saveData() {
+            var name = escape(document.getElementById('name').value);
+            var address = escape(document.getElementById('address').value);
+            var type = document.getElementById('type').value;
+            var latlng = marker.getPosition();
+            var url = 'phpsqlinfo_addrow.php?name=' + name + '&address=' + address +
+                '&type=' + type + '&lat=' + latlng.lat() + '&lng=' + latlng.lng();
+
+            downloadUrl(url, function(data, responseCode) {
+
+                if (responseCode == 200 && data.length <= 1) {
+                    infowindow.close();
+                    messagewindow.open(map, marker);
+                }
+            });
+}
+
+function downloadUrl(url, callback) {
+            var request = window.ActiveXObject ?
+                new ActiveXObject('Microsoft.XMLHTTP') :
+                new XMLHttpRequest;
+
+            request.onreadystatechange = function() {
+                if (request.readyState == 4) {
+                    request.onreadystatechange = doNothing;
+                    callback(request.responseText, request.status);
+                }
+            };
+
+            request.open('GET', url, true);
+            request.send(null);
+}</script>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeryQUReAomPDiBe6toux-gRCazvnZHnQ&callback=initMap"></script>
-    </body>
+</body>
 </html>
