@@ -30,7 +30,13 @@
                 <tr>
                     <td>Date:</td>
                     <td>
-                        <input type="date" name="Date">
+                        <input type="date" name="Day">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Longitude:</td>
+                    <td>
+                        <input type="number" name="Longitude">
                     </td>
                 </tr>
                 <tr>
@@ -41,6 +47,18 @@
                             @for (int i = 0; i < Model.hairStyles.Count; i++)
                             {
                                 <option value='@Model.hairStyles[i]'>@Model.hairStyles[i]</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Hair Color</td>
+                    <td>
+                        <select name='HairColor'>
+                            +
+                            @for (int i = 0; i < Model.hairColors.Count; i++)
+                            {
+                                <option value='@Model.hairColors[i]'>@Model.hairColors[i]</option>
                             }
                         </select>
                     </td>

@@ -40,20 +40,27 @@ namespace Seen.Controllers
         }
 
         [HttpGet]
-        [Route("Sighting")]
-        public async Task<IActionResult> Sighting()
+        [Route("Sightings")]
+        public async Task<IActionResult> Sightings()
         {
-            //var list = await sightingRepository.SelectAllAsync();
-            return View(answers);
+            var list = await sightingRepository.SelectAllAsync();
+            return View(list);
         }
 
         [HttpPost]
-        [Route("Sighting")]
-        public async Task<IActionResult> Sighting(Answers answers)
+        [Route("Sightings")]
+        public async Task<IActionResult> Sightings(Answers answers)
         {
             //var list = await sightingRepository.SelectAllAsync();
             return RedirectToAction("Sighting");
         }
 
+        [HttpGet]
+        [Route("Debe")]
+        public async Task<IActionResult> Debe()
+        {
+            var list = await sightingRepository.SelectAllAsync();
+            return Ok(list);
+        }
     }
 }
