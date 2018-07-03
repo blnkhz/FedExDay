@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <style>
@@ -56,69 +56,87 @@
     <div id="form">
         @for (int i = 0; i < Model.Count; i++)
         {
-            <table>
-                <tr>
-                    <td>Date:</td>
-                    <td>
-                        <p>@Model[i].Day</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Hairstyle:</td>
-                    <td>
-                        <p>@Model[i].HairStyle</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Hair Color</td>
-                    <td>@Model[i].HairColor</td>
-                </tr>
-                <tr>
-                    <td>Gender:</td>
-                    <td>
-                        @Model[i].Gender
-                    </td>
-                </tr>
-                <tr>
-                    <td>Glasses:</td>
-                    <td>
-                        @if (@Model[i].Glasses == true)
-                        {
-                            <p>Yes</p>
-                        }
-                        else
-                        {
-                            <p>No</p>
+        <table>
+            <tr>
+                <td>Date:</td>
+                <td>
+                    <p>@Model[i].Day</p>
+                </td>
+            </tr>
+            <tr>
+                <td>Hairstyle:</td>
+                <td>
+                    <p>@Model[i].HairStyle</p>
+                </td>
+            </tr>
+            <tr>
+                <td>Hair Color</td>
+                <td>@Model[i].HairColor</td>
+            </tr>
+            <tr>
+                <td>Gender:</td>
+                <td>
+                    @Model[i].Gender
+                </td>
+            </tr>
+            <tr>
+                <td>Glasses:</td>
+                <td>
+                    @if (@Model[i].Glasses == true)
+                    {
+                        <p>Yes</p>
+                    }
+                    else
+                    {
+                        <p>No</p>
 
-                        }
-                    </td>
-                </tr>
-            </table>
+                    }
+                </td>
+            </tr>
+        </table>
         }
     </div>
-    <script>
-
-        function initMap() {
+    <script type="text/javascript">
+        window.onload = function () {
+            var locations = [
+                
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <text>
+                [
+                        "@Model[i].Latitude",
+                    "@Model[i].Longitude"
+                ],
+                        </text>
+                    }
+                
+            ];
+            gmarkers = [];
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: new google.maps.LatLng(47.507589, 19.066128),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
             var infowindow = new google.maps.InfoWindow();
-            var map = new google.maps.Map(
-                document.getElementById('map'), { zoom: 4, center: { lat: 0, lng: 0 } });
-            @foreach (var item in Model)
-            {
-            <text>
-            var location = { lat: @item.Latitude, lng: @item.Longitude };
-            var marker = new google.maps.Marker({ position: location, map: map });
-            </text>
+            function createMarker(latlng, html) {
+                var marker = new google.maps.Marker({
+                    position: latlng,
+                    map: map
+                });
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.setContent(html);
+                    infowindow.open(map, marker);
+                });
+                return marker;
             }
-            infowindow = new google.maps.InfoWindow({
-                content: document.getElementById('form')
-            });
-            google.maps.event.addListener(marker, 'click', function () {
-                infowindow.open(map, marker);
-            });
+            for (var i = 0; i < locations.length; i++) {
+                gmarkers[locations[i][0]] =
+                    createMarker(new google.maps.LatLng(locations[i][0], locations[i][1]));
             }
+        }
     </script>
     <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeryQUReAomPDiBe6toux-gRCazvnZHnQ&callback=initMap"></script>
-    <footer>2018 - Blanka Eszter Hoóz & Máté Dugas</footer>
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeryQUReAomPDiBe6toux-gRCazvnZHnQ&callback=initMap">
+    </script>
 </body>
 </html>
