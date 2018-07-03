@@ -26,9 +26,8 @@ namespace Seen.Controllers
         }
         [HttpGet]
         [Route("Add")]
-        public async Task<IActionResult> Add()
+        public IActionResult Add()
         {
-            //var list = await sightingRepository.SelectAllAsync();
             return View(answers);
         }
 
@@ -39,5 +38,22 @@ namespace Seen.Controllers
             await sightingRepository.CreateAsync(sighting);
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        [Route("Sighting")]
+        public async Task<IActionResult> Sighting()
+        {
+            //var list = await sightingRepository.SelectAllAsync();
+            return View(answers);
+        }
+
+        [HttpPost]
+        [Route("Sighting")]
+        public async Task<IActionResult> Sighting(Answers answers)
+        {
+            //var list = await sightingRepository.SelectAllAsync();
+            return RedirectToAction("Sighting");
+        }
+
     }
 }
