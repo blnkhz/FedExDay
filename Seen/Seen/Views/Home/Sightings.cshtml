@@ -19,6 +19,8 @@
             font-size: 2em;
             text-decoration: none;
             color: #DC82A4;
+            display: block;
+            text-align:center;
         }
 
         html, body {
@@ -27,12 +29,13 @@
             padding: 0;
         }
 
-        img {
+        #logo {
             display: block;
             margin-left: auto;
             margin-right: auto;
             margin-top: 50px;
             width: 50%;
+            min-width: 400px;
         }
 
         footer {
@@ -49,21 +52,20 @@
             font-family: Arial, Helvetica, sans-serif;
         }
         p{
-            font-size:1em;
+            font-size:1.2em;
             color: #5B89C7;
+            min-width: 200px;
         }
 
         #form {
             font-family: Arial, Helvetica, sans-serif;
         }
-        p{
-            
-        }
+
     </style>
 </head>
 <body>
     <a href="/">
-        <img src="https://i.imgur.com/3kGnqYa.png" alt="s e e n">
+        <img id="logo" src="https://i.imgur.com/3kGnqYa.png" alt="s e e n">
     </a>
     <div id="map"></div>
     <script type="text/javascript">
@@ -82,8 +84,6 @@
                     "@Model[i].Gender",
                     "@Model[i].Glasses",
                     "@Model[i].Message"
-                    
-
                 ],
                         </text>
                     }
@@ -102,7 +102,7 @@
                 });
                 google.maps.event.addListener(marker, 'click', function () {
                     var glassesTruth = glasses ? "Yes" : "No";
-                    var content = `<p>Hair:</p>${haircolor}, <br> ${hairstyle} <br><p>Gender:</p> ${gender} <br> <p>Glasses?</p> ${glassesTruth} <br> ${message} <br><br><a href="itsamatch/${id}" id="itsme">IT'S ME!</a>`;
+                    var content = `<p>Hair:</p>${haircolor}, ${hairstyle} <br><p>Gender:</p> ${gender} <br> <p>Glasses?</p> ${glassesTruth} <br> <p>Message</p> ${message} <br><br><a href="itsamatch/${id}" id="itsme">IT'S ME!</a>`;
                     infowindow.setContent(content);
                     infowindow.open(map, marker);
                 });
