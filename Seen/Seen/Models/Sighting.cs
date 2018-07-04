@@ -18,5 +18,6 @@ namespace Seen.Models
         public string HairColor { get; set; }
         public string HairStyle { get; set; }
         public bool Glasses { get; set; }
+        public string Message { get; set; }
     }
 }

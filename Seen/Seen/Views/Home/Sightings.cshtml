@@ -81,6 +81,7 @@
                     "@Model[i].HairStyle",
                     "@Model[i].Gender",
                     "@Model[i].Glasses",
+                    "@Model[i].Message"
                     
 
                 ],
@@ -94,20 +95,21 @@
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
             var infowindow = new google.maps.InfoWindow();
-            function createMarker(latlng, id, haircolor, hairstyle, gender, glasses) {
+            function createMarker(latlng, id, haircolor, hairstyle, gender, glasses, message) {
                 var marker = new google.maps.Marker({
                     position: latlng,
                     map: map
                 });
                 google.maps.event.addListener(marker, 'click', function () {
-                    var content = `<p>Hair:</p>${haircolor}, <br> ${hairstyle} <br><p>Gender:</p> ${gender} <br> <p>Glasses?</p> ${glasses} <br><br><a href="itsamatch/${id}" id="itsme">IT'S ME!</a>`;
+                    var glassesTruth = glasses ? "Yes" : "No";
+                    var content = `<p>Hair:</p>${haircolor}, <br> ${hairstyle} <br><p>Gender:</p> ${gender} <br> <p>Glasses?</p> ${glassesTruth} <br> ${message} <br><br><a href="itsamatch/${id}" id="itsme">IT'S ME!</a>`;
                     infowindow.setContent(content);
                     infowindow.open(map, marker);
                 });
                 return marker;
             }
             for (var i = 0; i < locations.length; i++) {
-                createMarker(new google.maps.LatLng(locations[i][0], locations[i][1]), locations[i][2], locations[i][3], locations[i][4], locations[i][5], locations[i][6]);
+                createMarker(new google.maps.LatLng(locations[i][0], locations[i][1]), locations[i][2], locations[i][3], locations[i][4], locations[i][5], locations[i][6], locations[i][7]);
             }
         }
     </script>
