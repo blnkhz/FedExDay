@@ -15,6 +15,11 @@
             margin-top: 100px;
             margin-bottom: 40px;
         }
+        #itsme {
+            font-size: 2em;
+            text-decoration: none;
+            color: #DC82A4;
+        }
 
         html, body {
             height: 100%;
@@ -43,9 +48,16 @@
             text-align: center;
             font-family: Arial, Helvetica, sans-serif;
         }
+        p{
+            font-size:1em;
+            color: #5B89C7;
+        }
 
         #form {
             font-family: Arial, Helvetica, sans-serif;
+        }
+        p{
+            
         }
     </style>
 </head>
@@ -88,7 +100,7 @@
                     map: map
                 });
                 google.maps.event.addListener(marker, 'click', function () {
-                    var content = `${haircolor} <br> ${hairstyle} <br> ${gender} <br> ${glasses} <a href="itsamatch/${id}">a</a>`;
+                    var content = `<p>Hair:</p>${haircolor}, <br> ${hairstyle} <br><p>Gender:</p> ${gender} <br> <p>Glasses?</p> ${glasses} <br><br><a href="itsamatch/${id}" id="itsme">IT'S ME!</a>`;
                     infowindow.setContent(content);
                     infowindow.open(map, marker);
                 });
