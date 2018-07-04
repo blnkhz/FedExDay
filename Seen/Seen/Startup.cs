@@ -26,6 +26,15 @@ namespace Seen
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddDbContext<SeenContext>(options =>
+   options.UseNpgsql("User ID=postgres;Password=dum123;Host=localhost;Port=5432;Database=SEENDB;"));
+            services.AddScoped<SightingRepository>();
+            services.AddScoped<Answers>();
+        }
+
+        public void ConfigureTestingServices(IServiceCollection services)
+        {
+            services.AddMvc();
             services.AddDbContext<SeenContext>(opt => opt.UseInMemoryDatabase("testdatabase"));
             services.AddScoped<SightingRepository>();
             services.AddScoped<Answers>();
