@@ -8,5 +8,5 @@ An application that lets two strangers who have met but have never interacted co
 * Google Maps
 
 ### Members:
-* [Blanka Eszter Hooz] (https://github.com/blnkhz)
-* [Mate Dugas] (https://github.com/dugasmate)
+* [Blanka Eszter Hooz](https://github.com/blnkhz)
+* [Mate Dugas](https://github.com/dugasmate)
