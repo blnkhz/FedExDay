@@ -48,6 +48,7 @@
         }
      #form {
         font-family:Arial, Helvetica, sans-serif;
+        display: none;
        }
           
     </style>
@@ -131,11 +132,7 @@
         </form>
     </div>
 
-    <script>var map;
-var marker;
-var infowindow;
-var messagewindow;
-
+    <script>
 function initMap() {
             var california = { lat: 47.507589, lng: 19.066128 };
             map = new google.maps.Map(document.getElementById('map'), {
@@ -156,6 +153,7 @@ function initMap() {
 
                 google.maps.event.addListener(marker, 'click', function() {
                     infowindow.open(map, marker);
+                    document.getElementById('form').style.display = "block";
                 });
 
                 google.maps.event.addListener(marker, 'click', function(event) {
