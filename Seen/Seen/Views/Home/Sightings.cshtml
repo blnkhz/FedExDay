@@ -82,7 +82,7 @@
                     "@Model[i].HairColor",
                     "@Model[i].HairStyle",
                     "@Model[i].Gender",
-                    "@Model[i].Glasses",
+                    "@Model[i].Glasses.ToString().ToLower()",
                     "@Model[i].Message"
                 ],
                         </text>
@@ -101,7 +101,9 @@
                     map: map
                 });
                 google.maps.event.addListener(marker, 'click', function () {
-                    var glassesTruth = glasses ? "Yes" : "No";
+                    var glassesTruth;
+                    if (glasses === "true") { glassesTruth = "Yes" }
+                    else { glassesTruth = "No" };
                     var content = `<p>Hair:</p>${haircolor}, ${hairstyle} <br><p>Gender:</p> ${gender} <br> <p>Glasses?</p> ${glassesTruth} <br> <p>Message</p> ${message} <br><br><a href="itsamatch/${id}" id="itsme">IT'S ME!</a>`;
                     infowindow.setContent(content);
                     infowindow.open(map, marker);
