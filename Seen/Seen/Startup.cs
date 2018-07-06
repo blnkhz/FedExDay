@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -18,16 +19,21 @@ namespace Seen
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+              .SetBasePath(Directory.GetCurrentDirectory())
+              .AddJsonFile($"appsettings.json", optional: true);
+
+            Configuration = builder.Build();
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; set; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+      
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
             services.AddDbContext<SeenContext>(options =>
-   options.UseNpgsql("User ID=postgres;Password=dum123;Host=localhost;Port=5432;Database=SEENDB;"));
+            options.UseNpgsql(Configuration["ConnectionString"]));
             services.AddScoped<SightingRepository>();
             services.AddScoped<Answers>();
         }
