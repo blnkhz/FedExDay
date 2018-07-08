@@ -46,6 +46,15 @@ namespace Seen
             services.AddScoped<Answers>();
         }
 
+        public void ConfigureHerokuServices(IServiceCollection services)
+        {
+            services.AddMvc();
+            services.AddDbContext<SeenContext>(options =>
+            options.UseNpgsql(Configuration["ConnectionString2"]));
+            services.AddScoped<SightingRepository>();
+            services.AddScoped<Answers>();
+        }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -55,7 +64,7 @@ namespace Seen
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseDeveloperExceptionPage();
             }
 
             app.UseStaticFiles();
