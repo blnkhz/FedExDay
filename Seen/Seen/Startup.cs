@@ -46,7 +46,7 @@ namespace Seen
         {
             services.AddMvc();
             services.AddDbContext<SeenContext>(options =>
-            options.UseNpgsql(Configuration["ConnectionString2"]));
+            options.UseNpgsql(Configuration["ConnectionStringHeroku"]));
             services.AddScoped<SightingRepository>();
             services.AddScoped<Answers>();
         }
@@ -64,7 +64,7 @@ namespace Seen
 
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
+            app.UseMvc(routes =>    
             {
                 routes.MapRoute(
                     name: "default",
