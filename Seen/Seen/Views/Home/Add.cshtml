@@ -61,6 +61,7 @@
     <a href="/">
         <img id="logo" src="https://i.imgur.com/3kGnqYa.png" alt="s e e n">
     </a>
+
     <div id="map" height="460px" width="100%"></div>
     <div id="form">
         <form action="Add" method="post">
@@ -142,6 +143,7 @@
     </div>
 
     <script>
+        var marker = null;
 function initMap() {
             var greenfox = { lat: 47.507589, lng: 19.066128 };
             map = new google.maps.Map(document.getElementById('map'), {
@@ -153,11 +155,16 @@ function initMap() {
                 content: document.getElementById('form')
             });
 
-            google.maps.event.addListener(map, 'click', function(event) {
+    google.maps.event.addListener(map, 'click', function (event) {
+
+        if (marker != null) {            
+            marker.setMap(null);
+            marker = null;
+        }
                 marker = new google.maps.Marker({
                     position: event.latLng,
                     map: map
-                });
+        });
 
 
                 google.maps.event.addListener(marker, 'click', function() {
