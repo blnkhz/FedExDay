@@ -19,7 +19,8 @@ namespace Seen.Controllers
             this.sightingRepository = sightingRepository;
             this.answers = answers;
         }
-
+        [HttpGet]
+        [Route("")]
         public IActionResult Index()
         {
             return View();

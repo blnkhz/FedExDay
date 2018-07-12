@@ -10,6 +10,7 @@ namespace Seen.Entities
     public class SeenContext : DbContext
     {
         public DbSet<Sighting> Sightings{ get; set; }
+        public DbSet<User> Users { get; set; }
 
         public SeenContext(DbContextOptions<SeenContext> options) : base(options) { }
     }

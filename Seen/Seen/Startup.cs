@@ -39,6 +39,7 @@ namespace Seen
             services.AddMvc();
             services.AddDbContext<SeenContext>(opt => opt.UseInMemoryDatabase("testdatabase"));
             services.AddScoped<SightingRepository>();
+            services.AddScoped<UserRepository>();
             services.AddScoped<Answers>();
         }
 
@@ -59,17 +60,12 @@ namespace Seen
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseDeveloperExceptionPage();
             }
 
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>    
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvc();
         }
     }
 }

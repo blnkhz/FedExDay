@@ -1,0 +1,70 @@
+﻿<html>
+<head>
+</head>
+<body>
+    <form action="Register" method="post">
+            <table>
+                <tr><td>Social Handle:</td> <td><input type='text' name="SocialHandle" /> </td> </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td>
+                        <input type="text" name="Name">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td>
+                        <input type="password" name="Password">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Hairstyle</td>
+                    <td>
+                        <select name='Hairstyle'>
+                            +
+                            @for (int i = 0; i < Model.hairStyles.Count; i++)
+                            {
+                                <option value='@Model.hairStyles[i]'>@Model.hairStyles[i]</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Hair Color</td>
+                    <td>
+                        <select name='HairColor'>
+                            +
+                            @for (int i = 0; i < Model.hairColors.Count; i++)
+                            {
+                                <option value='@Model.hairColors[i]'>@Model.hairColors[i]</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>
+                        <select name='Gender'>
+                            +
+                            @for (int i = 0; i < Model.genders.Count; i++)
+                            {
+                                <option value='@Model.genders[i]'>@Model.genders[i]</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Glasses?</td>
+                    <td>
+                        <select name='Glasses'>
+                            +
+                            <option value='true'>Yes</option>
+                            <option value='false'>No</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <button type="submit">SUBMIT</button>
+        </form>
+</body>
+</html>
