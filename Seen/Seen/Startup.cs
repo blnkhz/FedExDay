@@ -31,6 +31,7 @@ namespace Seen
             services.AddDbContext<SeenContext>(options =>
             options.UseNpgsql(Configuration["ConnectionString"]));
             services.AddScoped<SightingRepository>();
+            services.AddScoped<UserRepository>();
             services.AddScoped<Answers>();
         }
 
@@ -49,6 +50,7 @@ namespace Seen
             services.AddDbContext<SeenContext>(options =>
             options.UseNpgsql(Configuration["ConnectionStringHeroku"]));
             services.AddScoped<SightingRepository>();
+            services.AddScoped<UserRepository>();
             services.AddScoped<Answers>();
         }
 
